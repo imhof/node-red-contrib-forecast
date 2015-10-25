@@ -34,11 +34,13 @@ module.exports = function (RED) {
       
     var node = this;
     this.on('input', function(msg){
-      var forecastResult = forecast.get ([this.latitude, this.longitude], true, function (err, weather){
-        if (err) return console.dir(err);
-        return weather; //TODO does it works ? 
+      forecast.get ([this.latitude, this.longitude], true, function (err, weather){
+        if (err) return console.log(err);
+        //console.log(weather);
+        node.send({payload:weather});
+        return weather; //TODO do I need this ?
       });
-      node.send({payload:forecastResult.weather});
+      
     });
 
   }
