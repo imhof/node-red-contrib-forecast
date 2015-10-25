@@ -1,5 +1,6 @@
 <!--
-  Copyright 2014 Tiago Machado.
+  A forecast node for IBM's Node-Red
+  Copyright 2015 Tiago Machado.
 
   Licensed under the Apache License, Version 2.0 (the "License");
   you may not use this file except in compliance with the License.
@@ -22,7 +23,7 @@
   <div class="form-row">
     <label for="node-input-units"><i class="fa fa-wrench"></i> Units</label>
     <select type="text" id="node-input-units">
-      <option value="celcius">celsius</option>
+      <option value="celcius">celcius</option>
       <option value="fahrenheit">fahrenheit</option>
     </select>
   </div>
@@ -31,12 +32,21 @@
     <input type="text" id="node-input-latitude">
   </div>
   <div class="form-row">
-    <label for="node-input-longitude"><i class="fa fa-compass"></i> longitude</label>
+    <label for="node-input-longitude"><i class="fa fa-compass"></i> Longitude</label>
     <input type="text" id="node-input-longitude">
   </div>
-  //Todo implement a service selector
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  
 </script>
 
+<script type="text/x-red" data-help-name="lower-case">
+    <p>A simple node that gets the forecast data from Forecast.io and outputs a JSON file</p>
+</script>
+
+<!--Todo implement a service selector-->
 <script type="text/javascript">
   RED.nodes.registerType('forecast', {
     category: 'storage-input',
@@ -46,6 +56,7 @@
       units: { value: 'celcius', required: true },
       latitude: { value: '' , required: true },
       longitude: { value: '', required: true  },
+      name: {value:"Forecast"}
     },
     inputs: 1,
     outputs: 1,

@@ -17,48 +17,33 @@
 module.exports = function (RED) {
   var Forecast = require ('forecast')
 
-  function ForecastNode(n){
-    RED.nodes.createNode(this, n);
-    this.key = n.key;
-    this.units = n.units;
-    this.latitude = n.latitude;
-    this.longitude = n.longitude;
-    this.forecastConfig = RED.nodes.getNode(this.forecast);
-    if (this.forecastConfig){
+  function ForecastNode(config){
+    RED.nodes.createNode(this, config);
+    
+    this.key = config.key;
+    this.units = config.units;
+    this.latitude = config.latitude;
+    this.longitude =  config.longitude;
+    
+    forecast = new Forecast({
+      service: 'forecast.io',
+      key: this.key,
+      units: this.units,
+      cache: true,      //TODO  Cache 
+    });
       
-      forecast = new Forecast({
-        service: 'forecast.io',
-        key: this.key,
-        units: this.units,
-        cache: true,      //TODO  Cache 
+    var node = this;
+    this.on('input', function(msg){
+      var forecastResult = forecast.get ([this.latitude, this.longitude], true, function (err, weather){
+        if (err) return console.dir(err);
+        return weather; //TODO does it works ? 
       });
-      
-      var node = this;
-      node.on('input', function (msg) {
-        var key = node.key || msg.key || '';
-        var latitude = node.latitude || msg.latitude || '';
-        var longitude = node.longitude || msg.longitude || '';
-        this.sendMsg = function(err, result){
-          
-          if (err){ //TODO Does it works ? 
-            node.error(err.toString());
-            node.status({ fill: 'red', shape: 'ring', text: 'failed' });
+      node.send({payload:forecastResult.weather});
+    });
 
-          }
-          node.status({}); // TODO WHY ?
-
-          //result.once('close', function() { conn.end(); });
-          //result.pipe(fs.createWriteStream(localFilename));
-          msg.payload = forecast.get ([this.latitude, this.longitude], true, function (err, weather){
-            if (err) return console.dir(err);
-            return weather; //TODO does it works ? 
-          });
-
-        }
-      });
-
-    }
   }
 
   RED.nodes.registerType('forecast', ForecastNode);
 }
+
+
