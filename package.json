@@ -1,0 +1,31 @@
+{
+  "name": "node-red-contrib-forecast",
+  "version": "1.0.0",
+  "description": "A Node-RED node for forecast",
+  "main": "forecast.js",
+  "scripts": {
+    "test": "test"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/machadotiago/node-red-contrib-forecast.git"
+  },
+  "keywords": [
+    "forecast",
+    "node-red"
+  ],
+  "author": "Tiago Machado",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/machadotiago/node-red-contrib-forecast/issues"
+  },
+  "homepage": "https://github.com/machadotiago/node-red-contrib-forecast#readme",
+  "dependencies": {
+    "forecast": "^0.2.1"
+  },
+  "node-red": {
+    "nodes": {
+        "node-red-contrib-forecast": "node-red-contrib-forecast/forecast.js"
+    }
+  }
+}
