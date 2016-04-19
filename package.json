@@ -21,7 +21,7 @@
   },
   "homepage": "https://github.com/machadotiago/node-red-contrib-forecast#readme",
   "dependencies": {
-    "forecast": "^0.2.1"
+    "forecast": "git://github.com/imhof/forecast.git#query_params"
   },
   "node-red": {
     "nodes": {

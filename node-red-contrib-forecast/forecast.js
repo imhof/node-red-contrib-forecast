@@ -29,12 +29,13 @@ module.exports = function (RED) {
       service: 'forecast.io',
       key: this.key,
       units: this.units,
+      language: this.language,
       cache: true,      //TODO  Cache 
     });
       
     var node = this;
     this.on('input', function(msg){
-      forecast.get ([this.latitude, this.longitude], true, function (err, weather){
+      forecast.get ([this.latitude, this.longitude], {}, true, function (err, weather) {
         if (err) return console.log(err);
         //console.log(weather);
         node.send({payload:weather});

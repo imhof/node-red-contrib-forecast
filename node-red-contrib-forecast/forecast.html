@@ -23,8 +23,11 @@
   <div class="form-row">
     <label for="node-input-units"><i class="fa fa-wrench"></i> Units</label>
     <select type="text" id="node-input-units">
-      <option value="celcius">celcius</option>
-      <option value="fahrenheit">fahrenheit</option>
+      <option value="si">International (°C, m/s, ...)</option>
+      <option value="us">US (°F, mph, ...)</option>
+      <option value="ca">Ca (°F, km/h, ...)</option>
+      <option value="uk2">UK/SI (SI with miles)</option>
+      <option value="auto">Automatic, based on location</option>
     </select>
   </div>
   <div class="form-row">
@@ -34,6 +37,10 @@
   <div class="form-row">
     <label for="node-input-longitude"><i class="fa fa-compass"></i> Longitude</label>
     <input type="text" id="node-input-longitude">
+  </div>
+  <div class="form-row">
+    <label for="node-input-language"><i class="fa-language"></i> Language (ISO code)</label>
+    <input type="text" id="node-input-language">
   </div>
   <div class="form-row">
     <label for="node-input-name"><i class="icon-tag"></i> Name</label>
@@ -53,9 +60,10 @@
     color:"BurlyWood",
     defaults: {
       key: { value: '', required: true },
-      units: { value: 'celcius', required: true },
+      units: { value: 'si', required: true },
       latitude: { value: '' , required: true },
       longitude: { value: '', required: true  },
+      language: { value: 'en', required: false },
       name: {value:"Forecast"}
     },
     inputs: 1,
