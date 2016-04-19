@@ -24,6 +24,7 @@ module.exports = function (RED) {
     this.units = config.units;
     this.latitude = config.latitude;
     this.longitude =  config.longitude;
+	this.language = config.language;
     
     forecast = new Forecast({
       service: 'forecast.io',
